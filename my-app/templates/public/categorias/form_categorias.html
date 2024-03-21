@@ -1,0 +1,50 @@
+{% extends 'public/base_cpanel.html' %}
+<!-- Cambiando el título -->
+{% block title %}Crud con Python 🐍 | Registrar Categoría{% endblock %}
+<!---->
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename ='assets/css/file.css') }}" />
+{% endblock %}
+
+<!-- Inicio del bloque body -->
+{% block body %}
+<div class="card" style="border-radius: 0px !important">
+    <div class="row justify-content-center mb-2">
+        <div class="col-md-12">
+
+            <h3 class="text-center mt-5 mb-3"> <a href="#" onclick="history.back()">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </a>REGISTRAR NUEVA CATEGORÍA</h3>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-2">
+        <div class="col-md-10">
+            <form class="form-horizontal mx-auto" method="POST" action="/form-registrar-categoria" autocomplete="off">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="nombre_categoria" class="form-label">
+                                Nombre de la categoría
+                            </label>
+                            <input type="text" name="nombre_categoria" class="form-control" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-3 mt-4 text-center">
+                        <button type="submit" class="btn rounded-pill btn-primary">
+                            Guardar categoría ahora
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block customJS %}
+<script src="{{ url_for('static', filename ='assets/customJS/file.js') }}"></script>
+{% endblock %}

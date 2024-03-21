@@ -1,0 +1,39 @@
+{% for comentario in dataBusqueda %}
+<tr id="comentario_{{ comentario.id }}">
+  <td>{{ loop.index }}</td>
+  <td>{{ comentario.autor }}</td>
+  <td>{{ comentario.contenido }}</td>
+  <td>{{ comentario.fecha_creacion }}</td>
+  <td>
+    {% set noticia_asociada = buscarNoticiaUnica(comentario.noticia_id) %}
+    {% if noticia_asociada %}
+      {{ noticia_asociada.titulo }}
+    {% else %}
+      Noticia no encontrada
+    {% endif %}
+  </td>
+  <td>
+    <a
+      href="{{ url_for('viewEditarComentario', id=comentario.id) }}"
+      class="btn btn-success btn-sm"
+      data-bs-toggle="tooltip"
+      data-bs-offset="0,4"
+      data-bs-placement="top"
+      data-bs-html="true"
+      title="<span>Actualizar comentario</span>">
+      <i class="bi bi-arrow-clockwise"></i> Actualizar
+    </a>
+    <a
+      href="#"
+      onclick="eliminarComentario('{{ comentario.id }}');"
+      class="btn btn-danger btn-sm"
+      data-bs-toggle="tooltip"
+      data-bs-offset="0,4"
+      data-bs-placement="top"
+      data-bs-html="true"
+      title="<span>Eliminar comentario {{ comentario.autor }}</span>">
+      <i class="bi bi-trash3"></i> Eliminar
+    </a>
+  </td>
+</tr>
+{% endfor %}

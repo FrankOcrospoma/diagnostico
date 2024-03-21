@@ -1,0 +1,83 @@
+{% extends 'public/base_cpanel.html' %}
+<!-- Cambiando el título -->
+{% block title %}Crud con Python 🐍 | Registrar Noticia{% endblock %}
+<!---->
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename ='assets/css/file.css') }}" />
+{% endblock %}
+
+<!-- Inicio del bloque body -->
+{% block body %}
+<div class="card" style="border-radius: 0px !important">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12">
+      <h3 class="text-center mt-5 mb-3"> <a href="#" onclick="history.back()">
+        <i class="bi bi-arrow-left-circle"></i>
+    </a>REGISTRAR NUEVA NOTICIA</h3>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-8"> <!-- Aquí he cambiado el tamaño de la columna para centrar el formulario -->
+      <form class="form-horizontal mx-auto" method="POST" action="/form-registrar-noticia" autocomplete="off">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <label for="titulo_noticia" class="form-label">Título de la noticia</label>
+              <input type="text" name="titulo_noticia" class="form-control" required />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label for="contenido_noticia" class="form-label">Contenido de la noticia</label>
+              <textarea class="form-control" name="contenido_noticia" rows="5" required></textarea>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label for="fecha_publicacion" class="form-label">Fecha de Publicación</label>
+              <input type="date" class="form-control" name="fecha_publicacion" required />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label for="autor_noticia" class="form-label">Autor de la noticia</label>
+              <input type="text" name="autor_noticia" class="form-control" required />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label for="categoria_noticia" class="form-label">Categoría de la noticia</label>
+              <select name="categoria_noticia" class="form-control" required>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12">
+              <label for="precio_noticia" class="form-label">Precio de la noticia</label>
+              <input type="number" name="precio_noticia" class="form-control" step="0.01" required />
+            </div>
+          </div>
+
+          <div class="mb-3 mt-4 text-center">
+            <button type="submit" class="btn rounded-pill btn-primary">Guardar noticia ahora <i class="bi bi-arrow-clockwise"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block customJS %}
+<script src="{{ url_for('static', filename ='assets/customJS/file.js') }}"></script>
+{% endblock %}

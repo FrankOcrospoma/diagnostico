@@ -1,0 +1,92 @@
+{% extends 'public/base_cpanel.html' %}
+<!-- Cambiando el título -->
+{% block title %}Crud con Python 🐍 | Registrar Comentario{% endblock %}
+<!---->
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename ='assets/css/file.css') }}" />
+{% endblock %}
+
+<!-- Inicio del bloque body -->
+{% block body %}
+<div class="card" style="border-radius: 0px !important">
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12">
+      <h3 class="text-center mt-5 mb-3"> <a href="#" onclick="history.back()">
+        <i class="bi bi-arrow-left-circle"></i>
+    </a>REGISTRAR NUEVO COMENTARIO</h3>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-8"> <!-- Cambiado el tamaño de la columna para centrar el formulario -->
+      <form class="form-horizontal mx-auto" method="POST" action="/form-registrar-comentario" autocomplete="off">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12"> <!-- Cambiado el tamaño de la columna para centrar el formulario -->
+              <label for="autor_comentario" class="form-label">
+                Autor del comentario
+              </label>
+              <input
+                type="text"
+                name="autor_comentario"
+                class="form-control"
+                required />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12"> <!-- Cambiado el tamaño de la columna para centrar el formulario -->
+              <label for="contenido_comentario" class="form-label">
+                Contenido del comentario
+              </label>
+              <textarea
+                class="form-control"
+                name="contenido_comentario"
+                rows="5"
+                required></textarea>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12"> <!-- Cambiado el tamaño de la columna para centrar el formulario -->
+              <label for="fecha_creacion" class="form-label">
+                Fecha de Creación
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                name="fecha_creacion"
+                required />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-12"> <!-- Cambiado el tamaño de la columna para centrar el formulario -->
+              <label for="noticia_id" class="form-label">
+                Noticia Asociada
+              </label>
+              <select name="noticia_id" class="form-control" required>
+                {% for noticia in noticias %}
+                  <option value="{{ noticia.id }}">{{ noticia.titulo }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 mt-4 text-center">
+            <button type="submit" class="btn rounded-pill btn-primary">
+              Guardar comentario ahora
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block customJS %}
+<script src="{{ url_for('static', filename ='assets/customJS/file.js') }}"></script>
+{% endblock %}

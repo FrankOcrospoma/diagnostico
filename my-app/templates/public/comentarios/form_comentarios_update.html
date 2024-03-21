@@ -1,0 +1,84 @@
+{% extends 'public/base_cpanel.html' %}
+<!-- Cambiando el título -->
+{% block title %}Crud con Python 🐍 | Actualizar Comentario{% endblock %}
+<!---->
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename ='assets/css/file.css') }}" />
+{% endblock %}
+
+<!-- Inicio del bloque body -->
+{% block body %}
+<div class="card" style="border-radius: 0px !important">
+  {% if respuestaComentario %}
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12">
+      <h3 class="text-center mt-5 mb-3">
+        <a href="#" onclick="history.back()">
+          <i class="bi bi-arrow-left-circle"></i>
+        </a>
+        ACTUALIZAR DATOS DEL COMENTARIO
+      </h3>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-8"> <!-- Cambiado el tamaño de la columna para centrar el formulario -->
+      <form class="form-horizontal mx-auto" method="POST" action="{{ url_for('actualizarComentario', id = respuestaComentario.id ) }}" autocomplete="off">
+        <input type="text" class="form-control" name="id_comentario" value="{{ respuestaComentario.id }}" required hidden />
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="autor_comentario" class="form-label">Autor del comentario</label>
+              <input type="text" name="autor_comentario" value="{{ respuestaComentario.autor }}" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+              <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
+              <input type="date" name="fecha_creacion" value="{{ respuestaComentario.fecha_creacion }}" class="form-control" required />
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="contenido_comentario" class="form-label">Contenido del comentario</label>
+              <textarea class="form-control" name="contenido_comentario" rows="5" required>{{ respuestaComentario.contenido }}</textarea>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label for="noticia_id" class="form-label">Noticia Asociada</label>
+              <select name="noticia_id" class="form-control" required>
+                {% for noticia in noticias %}
+                    {% if noticia.id == respuestaComentario.noticia_id %}
+                        <option value="{{ noticia.id }}" selected>{{ noticia.titulo }}</option>
+                    {% else %}
+                        <option value="{{ noticia.id }}">{{ noticia.titulo }}</option>
+                    {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 mt-4 text-center">
+            <button type="submit" class="btn rounded-pill btn-primary">Guardar comentario ahora <i class="bi bi-arrow-clockwise"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% else %}
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-12">
+      <h3 class="text-center">No existe el comentario</h3>
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block customJS %}
+<script src="{{ url_for('static', filename ='assets/customJS/file.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% for noticia in dataBusqueda %}
+<tr id="noticia_{{ noticia.id }}">
+  <td>{{ loop.index }}</td>
+  <td>{{ noticia.titulo }}</td>
+  <td>{{ noticia.contenido }}</td>
+  <td>{{ noticia.fecha_publicacion }}</td>
+  <td>{{ noticia.autor }}</td>
+  <td>
+    {% set categoria = buscarCategoriaUnica(noticia.categoria_id) %}
+    {% if categoria %}
+      {{ categoria.nombre }}
+    {% else %}
+      Categoría no encontrada
+    {% endif %}
+  </td>
+  <td>{{ noticia.precio }}</td>
+  <td>
+    <a
+      href="{{ url_for('viewEditarNoticia', id=noticia.id) }}"
+      class="btn btn-success btn-sm"
+      data-bs-toggle="tooltip"
+      data-bs-offset="0,4"
+      data-bs-placement="top"
+      data-bs-html="true"
+      title="<span>Actualizar noticia</span>">
+      <i class="bi bi-arrow-clockwise"></i> Actualizar
+    </a>
+    <a
+      href="#"
+      onclick="eliminarNoticia('{{ noticia.id }}');"
+      class="btn btn-danger btn-sm"
+      data-bs-toggle="tooltip"
+      data-bs-offset="0,4"
+      data-bs-placement="top"
+      data-bs-html="true"
+      title="<span>Eliminar noticia {{ noticia.titulo }}</span>">
+      <i class="bi bi-trash3"></i> Eliminar
+    </a>
+  </td>
+</tr>
+{% endfor %}

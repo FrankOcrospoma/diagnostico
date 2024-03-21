@@ -1,0 +1,30 @@
+{% for categoria in dataBusqueda %}
+<tr id="categoria_{{ categoria.id }}">
+  <td>{{ loop.index }}</td>
+  <td>{{ categoria.nombre }}</td>
+  <td>
+
+    <a
+      href="{{ url_for('viewEditarCategoria', id = categoria.id) }}"
+      class="btn btn-success btn-sm"
+      data-bs-toggle="tooltip"
+      data-bs-offset="0,4"
+      data-bs-placement="top"
+      data-bs-html="true"
+      title="<span>Actualizar categoría</span>">
+      <i class="bi bi-arrow-clockwise"></i> Actualizar
+    </a>
+    <a
+      href="#"
+      onclick="eliminarCategoria('{{ categoria.id }}');"
+      class="btn btn-danger btn-sm"
+      data-bs-toggle="tooltip"
+      data-bs-offset="0,4"
+      data-bs-placement="top"
+      data-bs-html="true"
+      title="<span>Eliminar categoría {{ categoria.nombre }}</span>">
+      <i class="bi bi-trash3"></i> Eliminar
+    </a>
+  </td>
+</tr>
+{% endfor %}
